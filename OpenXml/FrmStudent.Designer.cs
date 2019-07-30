@@ -34,16 +34,18 @@
             this.BtnOpenXmlImport = new System.Windows.Forms.Button();
             this.BtnNpoiExport = new System.Windows.Forms.Button();
             this.BtnNpoiImport = new System.Windows.Forms.Button();
+            this.BtnExportWord = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.Highlight;
             this.dataGridView1.Location = new System.Drawing.Point(12, 115);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 323);
+            this.dataGridView1.Size = new System.Drawing.Size(895, 424);
             this.dataGridView1.TabIndex = 0;
             // 
             // BtnQuery
@@ -96,11 +98,22 @@
             this.BtnNpoiImport.UseVisualStyleBackColor = true;
             this.BtnNpoiImport.Click += new System.EventHandler(this.BtnNpoiImport_Click);
             // 
+            // BtnExportWord
+            // 
+            this.BtnExportWord.Location = new System.Drawing.Point(489, 23);
+            this.BtnExportWord.Name = "BtnExportWord";
+            this.BtnExportWord.Size = new System.Drawing.Size(132, 41);
+            this.BtnExportWord.TabIndex = 6;
+            this.BtnExportWord.Text = "导出文档";
+            this.BtnExportWord.UseVisualStyleBackColor = true;
+            this.BtnExportWord.Click += new System.EventHandler(this.BtnExportWord_Click);
+            // 
             // FrmStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(919, 551);
+            this.Controls.Add(this.BtnExportWord);
             this.Controls.Add(this.BtnNpoiImport);
             this.Controls.Add(this.BtnNpoiExport);
             this.Controls.Add(this.BtnOpenXmlImport);
@@ -122,5 +135,6 @@
         private System.Windows.Forms.Button BtnOpenXmlImport;
         private System.Windows.Forms.Button BtnNpoiExport;
         private System.Windows.Forms.Button BtnNpoiImport;
+        private System.Windows.Forms.Button BtnExportWord;
     }
 }

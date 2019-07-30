@@ -89,6 +89,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\SqlDA.cs" />
+    <Compile Include="WordHelper\OpenXmlWordUtil.cs" />
+    <Compile Include="WordHelper\TableConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
