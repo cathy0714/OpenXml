@@ -25,13 +25,6 @@ namespace OpenXml.ExcelHelper
                 , fileName);
         }
 
-        public static DataTable GetDataTable(DataGridView dgv, string tableName)
-        {
-            DataTable dataTable = dgv.DataSource as DataTable;
-            dataTable.TableName = tableName;
-            return dataTable;
-        }
-
         public static DataTable GetDataTable(int cols = 10, int rows = 10, string tabName = "mytable")
         {
             DataTable dt = new DataTable(tabName);

@@ -30,8 +30,9 @@ namespace OpenXml.ExcelHelper
         {
             // SpreadsheetDocument电子表格文档类
             SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(filename, SpreadsheetDocumentType.Workbook);
-
+            
             WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+            //workbookpart.SharedStringTablePart
             Workbook workbook = new Workbook();
             Sheets sheets = new Sheets();
 
@@ -87,7 +88,7 @@ namespace OpenXml.ExcelHelper
                     {
                         Cell newCell = new Cell();
                         val = dt.Rows[i][j];
-                        newCell.CellValue = new CellValue(val.ToString());
+                        newCell.CellValue = new CellValue(val.ToString().Trim(new char[] { '0',':'}));
                         newCell.DataType = new EnumValue<CellValues>(CellValues.String);
 
                         row.Append(newCell);
@@ -109,7 +110,7 @@ namespace OpenXml.ExcelHelper
             spreadsheetDocument.Close();
         }
 
-        public static DataTable GetSheet(string filename, string sheetName)
+        public static DataTable GetSheet(string filename)
         {
             DataTable dt = new DataTable();
             using (SpreadsheetDocument document = SpreadsheetDocument.Open(filename, false))
@@ -118,19 +119,16 @@ namespace OpenXml.ExcelHelper
                 //通过sheet名查找 sheet页
                 Sheet sheet = wbPart
                     .Workbook
-                    .Descendants<Sheet>()
-                    .Where(s => s.Name == sheetName)
-                    .FirstOrDefault();
+                    .Descendants<Sheet>().FirstOrDefault();
+                //.Where(s => s.Name == sheetName)
 
-                if (sheet == null)
-                {
-                    throw new ArgumentException("未能找到" + sheetName + " sheet 页");
-                }
+                //if (sheet == null)
+                //{
+                //    throw new ArgumentException("未能找到" + sheetName + " sheet 页");
+                //}
 
                 //获取Excel中共享表
-                SharedStringTablePart sharedStringTablePart = wbPart
-                    .GetPartsOfType<SharedStringTablePart>()
-                    .FirstOrDefault();
+                SharedStringTablePart sharedStringTablePart = wbPart.GetPartsOfType<SharedStringTablePart>().FirstOrDefault();
                 SharedStringTable sharedStringTable = null;
                 if (sharedStringTablePart != null)
                     sharedStringTable = sharedStringTablePart.SharedStringTable;
@@ -202,6 +200,9 @@ namespace OpenXml.ExcelHelper
                 switch (cell.DataType.Value)
                 {
                     //从共享表中获取值
+                    case CellValues.String:
+                        val = cell.InnerText;
+                        break;
                     case CellValues.SharedString:
                         if (sharedStringTable != null)
                             val = sharedStringTable
@@ -212,7 +213,6 @@ namespace OpenXml.ExcelHelper
                         val = string.Empty;
                         break;
                 }
-
             }
             return val;
         }

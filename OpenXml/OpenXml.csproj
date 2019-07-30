@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelHelper\CreatExcel.cs" />
+    <Compile Include="ExcelHelper\ExcelNpoi.cs" />
     <Compile Include="ExcelHelper\ExcelOpenXml.cs" />
     <Compile Include="ExcelHelper\TestData.cs" />
     <Compile Include="FrmStudent.cs">

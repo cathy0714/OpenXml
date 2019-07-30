@@ -13,17 +13,25 @@ namespace OpenXml.ExcelHelper
     [TestClass]
     public class CreatExcel
     {
-        [TestMethod]
-        public static void MadeTable(DataGridView dgv, string tableName)
+        public static void ExprotToExcel(DataTable dataTable, string fileName, int index)
         {
-            var fname = TestData.GetNewExcelFileName("ExcelText.xlsx");
-            var dataTable = TestData.GetDataTable(dgv, tableName);
-
             DataSet dataSet = new DataSet();
             dataSet.Tables.Add(dataTable.Copy());
+            
+            //ExcelOpenXml.Create(fileName, dataSet);
+            switch(index)
+            {
+                case 0:
+                    ExcelOpenXml.Create(fileName, dataSet);
+                    break;
+                case 1:
+                    ExcelNpoi.Create(fileName, dataSet);
+                    break;
+                default:
+                    break;
 
-            ExcelOpenXml.Create(fname, dataSet);
-            Assert.IsTrue(File.Exists(fname));
+            }
+            Assert.IsTrue(File.Exists(fileName));
         }
     }
 }
