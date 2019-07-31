@@ -19,6 +19,8 @@ namespace OpenXml
         static string sql = "select * from student";
         static string sqlstr = "server=LAPTOP-SM4B8RCG;database=test;user=sa;pwd=admin";
         int buttonIndex;
+        string[] obj = new string[] { "ID", "Name", "Number", "Age", "Sex", "Born" };
+        string[] obj1 = new string[] { "Property1", "Property2", "Property3", "Property4", "Property5", "Property6" };
 
         public FrmStudent()
         {
@@ -132,8 +134,27 @@ namespace OpenXml
             }
 
             ConfigModel configModel = new ConfigModel("table1");
-            OpenXmlWordUtil.InsertTable(wordPath, configModel, tableDataModels);
+            OpenXmlWordUtil.InsertTable(wordPath, configModel, tableDataModels, obj1);
 
+            List<StudentInfoModel> studentInfoModelList = new List<StudentInfoModel>();
+            
+            DataTable dataTable = gridView.DataSource as DataTable;
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                StudentInfoModel studentInfoModel = new StudentInfoModel();
+                DataRow dataRow = dataTable.Rows[i];
+                object[] obj = dataRow.ItemArray;
+                studentInfoModel.ID = (int)obj[0];
+                studentInfoModel.Name = (string)obj[1];
+                studentInfoModel.Number = (string)obj[2];
+                studentInfoModel.Age = (int)obj[3];
+                studentInfoModel.Sex = (string)obj[4];
+                studentInfoModel.Born = (DateTime)obj[5];
+                studentInfoModelList.Add(studentInfoModel);
+            }
+            ConfigModel configModel1 = new ConfigModel("table2");
+            
+            OpenXmlWordUtil.InsertTable(wordPath, configModel1, studentInfoModelList,obj);
 
 
             #endregion

@@ -12,20 +12,6 @@ namespace OpenXml.ExcelHelper
 {
     public class ExcelOpenXml
     {
-        /*
-         * excel 对象结构
-         * SpreadsheetDocument
-         *   》WorkbookPart
-         *       》WorksheetPart
-         *           》Worksheet
-         *            》SheetData
-         *       》WorksheetPart
-         *          》Worksheet
-         *                》SheetData1
-         *       》Workbook
-         *           》Sheets
-         *                》Sheet
-         */
         public static void Create(string filename, DataSet ds)
         {
             // SpreadsheetDocument电子表格文档类
